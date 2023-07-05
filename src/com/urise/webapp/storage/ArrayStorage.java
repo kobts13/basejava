@@ -18,8 +18,18 @@ public class ArrayStorage {
     }
 
     public void save(Resume r) {
-        storage[size] = r;
-        size++;
+        for (int i = 0; i < size; i++) {
+            if (storage[i].getUuid().equals(r.getUuid())) {
+                System.out.println("Save. Resume exist with same uuid: " + r.getUuid());
+                return;
+            }
+        }
+        if (size < 10000) {
+            storage[size] = r;
+            size++;
+        } else {
+            System.out.println("Save. Storage is crowded");
+        }
     }
 
     public Resume get(String uuid) {
@@ -28,6 +38,7 @@ public class ArrayStorage {
                 return storage[i];
             }
         }
+        System.out.println("Get. Resume not found for uuid: " + uuid);
         return null;
     }
 
@@ -42,6 +53,7 @@ public class ArrayStorage {
                 return;
             }
         }
+        System.out.println("Delete. Resume not found for uuid: " + uuid);
     }
 
     /**
@@ -62,5 +74,6 @@ public class ArrayStorage {
                 return;
             }
         }
+        System.out.println("Update. Resume not found for uuid: " + resume.getUuid());
     }
 }
