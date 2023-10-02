@@ -5,23 +5,21 @@ import ru.javawebinar.basejava.model.Resume;
 import java.util.Arrays;
 
 public class SortedArrayStorage extends AbstractArrayStorage {
+
     @Override
-    protected void saveIfExist(int index, Resume r) {
-        int position = Math.abs(index + 1);
-        for (int i = size - 1; i >= position; i--) {
-            storage[i + 1] = storage[i];
+    protected void fillDeletedElement(int index) {
+        int numMoved = size - index - 1;
+        if (numMoved > 0) {
+            System.arraycopy(storage, index + 1, storage, index, numMoved);
         }
-        storage[position] = r;
-        size++;
     }
 
     @Override
-    protected void deleteIfExist(int index) {
-        for (int i = index; i < size - 1; i++) {
-            storage[i] = storage[i + 1];
-        }
-        storage[size - 1] = null;
-        size--;
+    protected void insertElement(Resume r, int index) {
+//      http://codereview.stackexchange.com/questions/36221/binary-search-for-inserting-in-array#answer-36239
+        int insertIdx = -index - 1;
+        System.arraycopy(storage, insertIdx, storage, insertIdx + 1, size - insertIdx);
+        storage[insertIdx] = r;
     }
 
     @Override
