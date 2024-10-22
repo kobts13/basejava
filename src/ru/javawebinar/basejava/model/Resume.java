@@ -5,11 +5,11 @@ import java.util.UUID;
 /**
  * ru.javawebinar.basejava.model.Resume class
  */
-public class Resume{
+public class Resume {
 
     // Unique identifier
     private final String uuid;
-    private String fullName;
+    private final String fullName;
 
     public Resume(String fullName) {
         this(UUID.randomUUID().toString(), fullName);
@@ -18,6 +18,10 @@ public class Resume{
     public Resume(String uuid, String fullName) {
         this.uuid = uuid;
         this.fullName = fullName;
+    }
+
+    public String getFullName() {
+        return fullName;
     }
 
     public String getUuid() {
