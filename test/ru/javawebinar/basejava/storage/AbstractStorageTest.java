@@ -23,10 +23,10 @@ public abstract class AbstractStorageTest {
     private static final Resume RESUME_4;
 
     static {
-        RESUME_1 = new Resume(UUID_1, UUID_1);
-        RESUME_2 = new Resume(UUID_2, UUID_2);
-        RESUME_3 = new Resume(UUID_3, UUID_3);
-        RESUME_4 = new Resume(UUID_4, UUID_4);
+        RESUME_1 = new Resume(UUID_1);
+        RESUME_2 = new Resume(UUID_2);
+        RESUME_3 = new Resume(UUID_3);
+        RESUME_4 = new Resume(UUID_4);
     }
 
     protected AbstractStorageTest(Storage storage) {
@@ -54,7 +54,7 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void update() throws Exception {
-        Resume newResume = new Resume(UUID_1, UUID_1);
+        Resume newResume = new Resume(UUID_1);
         storage.update(newResume);
         assertTrue(newResume == storage.get(UUID_1));
     }
@@ -65,8 +65,8 @@ public abstract class AbstractStorageTest {
     }
 
     @Test
-    public void getAllSorted() throws Exception {
-        Resume[] array = storage.getAllSorted().toArray(new Resume[0]);
+    public void getAll() throws Exception {
+        Resume[] array = storage.getAll();
         assertEquals(3, array.length);
         assertEquals(RESUME_1, array[0]);
         assertEquals(RESUME_2, array[1]);
