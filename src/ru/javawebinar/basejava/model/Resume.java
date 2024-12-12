@@ -1,12 +1,12 @@
 package ru.javawebinar.basejava.model;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
 /**
- * ru.javawebinar.basejava.model.Resume class
+ * com.urise.webapp.model.Resume class
  */
 public class Resume implements Comparable<Resume> {
 
@@ -15,9 +15,8 @@ public class Resume implements Comparable<Resume> {
 
     private final String fullName;
 
-    private final Map<ContactType, String> contacts;
-
-    private final Map<SectionType, Section> sections;
+    private final Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
+    private final Map<SectionType, Section> sections = new EnumMap<>(SectionType.class);
 
     public Resume(String fullName) {
         this(UUID.randomUUID().toString(), fullName);
@@ -28,28 +27,14 @@ public class Resume implements Comparable<Resume> {
         Objects.requireNonNull(fullName, "fullName must not be null");
         this.uuid = uuid;
         this.fullName = fullName;
-        contacts = new HashMap<>();
-        sections = new HashMap<>();
     }
 
     public String getUuid() {
         return uuid;
     }
 
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setContact(ContactType type, String contact) {
-        contacts.put(type, contact);
-    }
-
     public String getContact(ContactType type) {
         return contacts.get(type);
-    }
-
-    public void setSection(SectionType type, Section section) {
-        sections.put(type, section);
     }
 
     public Section getSection(SectionType type) {
