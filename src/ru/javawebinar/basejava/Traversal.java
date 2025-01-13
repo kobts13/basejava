@@ -1,3 +1,5 @@
+package ru.javawebinar.basejava;
+
 import java.io.File;
 
 public class Traversal {

@@ -77,5 +77,15 @@ public class Organization {
             result = 31 * result + Objects.hashCode(description);
             return result;
         }
+
+        @Override
+        public String toString() {
+            return "Position{" +
+                    "startDate=" + startDate +
+                    ", endDate=" + endDate +
+                    ", title='" + title + '\'' +
+                    ", description='" + description + '\'' +
+                    '}';
+        }
     }
 }
