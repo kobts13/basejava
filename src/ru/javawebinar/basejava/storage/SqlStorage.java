@@ -82,7 +82,6 @@ public class SqlStorage implements Storage {
                 String fullName = rs.getString("full_name");
                 resumes.add(new Resume(uuid, fullName));
             }
-            System.out.println(resumes.get(0));
             return resumes;
         });
     }
