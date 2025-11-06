@@ -8,11 +8,13 @@ import ru.javawebinar.basejava.sql.SqlHelper;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class SqlStorage implements Storage {
+    public static final String DELETE_FROM_RESUME = "DELETE FROM resume";
     public final SqlHelper sqlHelper;
 
     public SqlStorage(String dbUrl, String dbUser, String dbPassword) {
@@ -21,7 +23,7 @@ public class SqlStorage implements Storage {
 
     @Override
     public void clear() {
-        sqlHelper.execute("DELETE FROM resume");
+        sqlHelper.execute(DELETE_FROM_RESUME);
     }
 
     @Override
@@ -39,11 +41,7 @@ public class SqlStorage implements Storage {
                     }
                     Resume r = new Resume(uuid, rs.getString("full_name"));
                     do {
-                        String value = rs.getString("value");
-                        String type = rs.getString("type");
-                        if (value != null && type != null) {
-                            r.addContact(ContactType.valueOf(type), value);
-                        }
+                        setContact(r, rs);
                     } while (rs.next());
 
                     return r;
@@ -97,7 +95,7 @@ public class SqlStorage implements Storage {
 
     @Override
     public void delete(String uuid) {
-        sqlHelper.execute("DELETE FROM resume WHERE uuid=?", ps -> {
+        sqlHelper.execute(DELETE_FROM_RESUME + " WHERE uuid=?", ps -> {
             ps.setString(1, uuid);
             if (ps.executeUpdate() == 0) {
                 throw new NotExistStorageException(uuid);
@@ -121,16 +119,20 @@ public class SqlStorage implements Storage {
                     ps.setString(1, resume.getUuid());
                     ResultSet rs = ps.executeQuery();
                     while (rs.next()) {
-                        String value = rs.getString("value");
-                        String type = rs.getString("type");
-                        if (value != null && type != null) {
-                            resume.addContact(ContactType.valueOf(type), value);
-                        }
+                        setContact(resume, rs);
                     }
                 }
             }
             return resumes;
         });
+    }
+
+    private static void setContact(Resume resume, ResultSet rs) throws SQLException {
+        String value = rs.getString("value");
+        String type = rs.getString("type");
+        if (value != null && type != null) {
+            resume.addContact(ContactType.valueOf(type), value);
+        }
     }
 
     @Override
