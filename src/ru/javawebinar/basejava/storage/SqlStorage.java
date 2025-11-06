@@ -40,8 +40,10 @@ public class SqlStorage implements Storage {
                     Resume r = new Resume(uuid, rs.getString("full_name"));
                     do {
                         String value = rs.getString("value");
-                        ContactType type = ContactType.valueOf(rs.getString("type"));
-                        r.addContact(type, value);
+                        String type = rs.getString("type");
+                        if (value != null && type != null) {
+                            r.addContact(ContactType.valueOf(type), value);
+                        }
                     } while (rs.next());
 
                     return r;
@@ -50,11 +52,22 @@ public class SqlStorage implements Storage {
 
     @Override
     public void update(Resume r) {
-        sqlHelper.execute("UPDATE resume SET full_name = ? WHERE uuid = ?", ps -> {
-            ps.setString(1, r.getFullName());
-            ps.setString(2, r.getUuid());
-            if (ps.executeUpdate() == 0) {
-                throw new NotExistStorageException(r.getUuid());
+        sqlHelper.transactionalExecute(conn -> {
+            try (PreparedStatement ps = conn.prepareStatement("UPDATE resume SET full_name = ? WHERE uuid = ?")) {
+                ps.setString(1, r.getFullName());
+                ps.setString(2, r.getUuid());
+                if (ps.executeUpdate() == 0) {
+                    throw new NotExistStorageException(r.getUuid());
+                }
+            }
+            try (PreparedStatement ps = conn.prepareStatement("UPDATE contact SET type = ?, value = ? WHERE resume_uuid = ?")) {
+                for (Map.Entry<ContactType, String> e : r.getContacts().entrySet()) {
+                    ps.setString(1, e.getKey().name());
+                    ps.setString(2, e.getValue());
+                    ps.setString(3, r.getUuid());
+                    ps.addBatch();
+                }
+                ps.executeBatch();
             }
             return null;
         });
@@ -95,11 +108,26 @@ public class SqlStorage implements Storage {
 
     @Override
     public List<Resume> getAllSorted() {
-        return sqlHelper.execute("SELECT * FROM resume r ORDER BY full_name,uuid", ps -> {
-            ResultSet rs = ps.executeQuery();
+        return sqlHelper.transactionalExecute(conn -> {
             List<Resume> resumes = new ArrayList<>();
-            while (rs.next()) {
-                resumes.add(new Resume(rs.getString("uuid"), rs.getString("full_name")));
+            try (PreparedStatement ps = conn.prepareStatement("SELECT * FROM resume r ORDER BY full_name,uuid")) {
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    resumes.add(new Resume(rs.getString("uuid"), rs.getString("full_name")));
+                }
+            }
+            try (PreparedStatement ps = conn.prepareStatement("SELECT * FROM contact WHERE resume_uuid = ?")) {
+                for (Resume resume : resumes) {
+                    ps.setString(1, resume.getUuid());
+                    ResultSet rs = ps.executeQuery();
+                    while (rs.next()) {
+                        String value = rs.getString("value");
+                        String type = rs.getString("type");
+                        if (value != null && type != null) {
+                            resume.addContact(ContactType.valueOf(type), value);
+                        }
+                    }
+                }
             }
             return resumes;
         });
