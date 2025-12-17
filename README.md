@@ -1,202 +1,113 @@
-# [Курс BaseJava (обновленный и переработанный)](http://javaops.ru/reg/basejava)
+# Курс BaseJava (обновленный и переработанный)
 
-## Разработка web-приложения "База данных резюме"
-
-В данном курсе вы создадите с нуля web-приложение, реализуя разные способы хранения резюме. Проект включает в себя следующее:
-  - **Технологии:** Java 8, GitHub/Git, JUnit, Logging, GSON, JAXB, SQL, PostgreSQL, Сервлеты, HTML, JSP, JSTL, Tomcat, Maven и многое другое
-  - **Различные способы реализации хранения резюме:**
-     - в сортированном и не сортированном массиве
-     - в коллекциях (List, Map)
-     - в файловой системе:
-        - с использованием File и Path API
+## Разработка Web приложения "База данных резюме"
+  -  используем: Java 8, <a href="https://zeroturnaround.com/rebellabs/java-tools-and-technologies-landscape-2016-trends/#java-ides-adoption">IntelliJ IDEA</a>,
+    <a href="https://zeroturnaround.com/rebellabs/java-tools-and-technologies-landscape-2016-trends/#java-vcs-adoption">GitHib/Git</a>, Сервлеты, JSP, JSTL, Tomcat, JUnit, PostgreSQL, GSON, JAXB
+  - хранение резюме
+     -  в памяти на основе массива, отсортированного массива, списка и ассоциированного массива (Map)
+     -  в файловой системе (File API и <a href="http://www.quizful.net/post/java-nio-tutorial">Java 7 NIO File API</a>)
         - в стандартной и кастомной сериализации Java
-        - в формате JSON ([Google Gson](https://en.wikipedia.org/wiki/Gson))
-        - в формате XML ([JAXB](https://ru.wikipedia.org/wiki/Java_Architecture_for_XML_Binding))
-     -  в реляционной базе [PostgreSQL](https://ru.wikipedia.org/wiki/PostgreSQL)
-  - **Установку (деплой) web-приложения:**
-     - в контейнер сервлетов [Tomcat](https://ru.wikipedia.org/wiki/Apache_Tomcat)
-     - в облачный сервис [Heroku](https://ru.wikipedia.org/wiki/Heroku)
+        - в формате JSON (<a href="https://github.com/google/gson">Google Gson</a>)
+        - в формате XML (<a href="https://ru.wikipedia.org/wiki/Java_Architecture_for_XML_Binding">JAXB</a>)
+     -  в реляционной базе <a href="https://ru.wikipedia.org/wiki/PostgreSQL">PostgreSQL</a>
+  -  деплой веб приложения
+     - в контейнер сервлетов <a href="http://tomcat.apache.org/">Tomcat</a>
+     - в облачный сервис <a href="https://www.heroku.com/">Heroku</a>
 
-> Любое знание стоит воспринимать как подобие семантического дерева: убедитесь в том, что понимаете фундаментальные принципы, то есть ствол и крупные ветки, прежде чем лезть в мелкие листья-детали. Иначе последним не на чем будет держаться
+> Любое знание стоит воспринимать как подобие семантического дерева: убедитесь в том, что понимаете фундаментальные принципы, то есть ствол и крупные ветки, прежде чем лезть в мелкие листья-детали. Иначе последним не на чем будет держаться.
 
-— Илон Маск
+*— Илон Маск
 
-### Изучите [бесплатный урок](lesson/lesson1.md). В конце урока находится домашнее задание, по которому можно оценить свой уровень готовности к проекту
-
-## Программа курса
-
-#### Занятие 1 (бесплатное)
- - Обзор курса и методики обучения
- - Подготовка и настройка рабочего окружения
- - Подходы, применяемые при разработке ПО
- - Обзор инструментов и технологий, используемых Java-разработчиками
- - Введение в язык Java: история создания, JDK, JVM, JRE, JIT-компиляция
+## Программа
+### [Занятие 1](https://github.com/JavaWebinar/basejava/blob/lesson/lesson/lesson01.md)
+ - Презентация проекта
+ - Разработка ПО
+ - Обзор языка Java
  - Системы управления версиями. Git
- - Домашнее задание
+ - ПЕРВОЕ ДОМАШНЕЕ ЗАДАНИЕ
 
-#### Занятие 2
- - Типы данных
- - Введение в объектно-ориентированное программирование
+### [Занятие 2](https://github.com/JavaWebinar/basejava/blob/lesson/lesson/lesson02.md)
  - Принципы ООП
- - Классы и объекты
- - Классы-обертки
- - Модификаторы доступа
- - Конструктор
- - Структура памяти java-программы: Heap (куча), Stack (стек)
- - Пакеты
- - Домашнее задание
+ - Структура памяти: куча, стек, регистры, константы
+ - Типы данных. Пакеты
 
-#### Занятие 3
- - Разбор домашнего задания
- - Обзор суперкласса Object
- - Связь между equals() и hashCode()
- - Статические методы и переменные
- - Программирование с помощью интерфейсов
- - Абстрактные классы
+### 
+ - Объектная модель в Java
  - Сложность алгоритмов
- - Паттерн проектирования Template Method
- - Домашнее задание
+ - Паттерн проектирования Шаблонный метод
  
-#### Занятие 4
- - Разбор домашнего задания
- - Конструктор
- - Работа со строками: String, StringBuilder, StringBuffer
- - String literal pool
- - Исключения (Exceptions)
- - Ключевые слова: this, super
- - Reflection
- - Аннотации
- - Введение в модульное тестирование. JUnit 
- - Домашнее задание
+### [Занятие 4](https://github.com/JavaWebinar/basejava/blob/lesson/lesson/lesson04.md)
+ - Работа со строками
+ - Исключения
+ - Reflection. Аннотации. Модульное тестирование
 
-#### Занятие 5
- - Разбор домашнего задания
- - Коллекций. Иерархия классов
- - Списки (List)
- - Множества (Set)
- - Ассоциативные массивы (Map)
- - Введение в Iterator
- - Домашнее задание
+### [Занятие 5](https://github.com/JavaWebinar/basejava/blob/lesson/lesson/lesson05.md)
+ - Контейнеры/коллекции
  
-#### Занятие 6
- - Разбор домашнего задания
- - Паттерн проектирования Iterator
- - Autoboxing и Unboxing
- - Вложенные классы
- - Внутренние классы
- - Локальные классы
- - Анонимные классы
- - Введение в лямбда-выражения
- - Функциональный интерфейс
- - Домашнее задание
+### [Занятие 6](https://github.com/JavaWebinar/basejava/blob/lesson/lesson/lesson06.md)
+ - Iterator / Iterable. Вложенные, внутренние, локальные и анонимные классы
+ - Новое в Java 8
 
-#### Занятие 7
- - Разбор домашнего задания
- - Дженерики (Generic)
- - Введение в логирование. Log4J, Java Logging API
- - Паттерн проектирования Singleton
- - Перечисления (Enum)
- - Объектная модель
- - Домашнее задание
+### [Занятие 7](https://github.com/JavaWebinar/basejava/blob/lesson/lesson/lesson07.md)
+ - Параметризация. Стирание типов
+ - Логирование
+ - Синглетон, Enum
 
-#### Занятие 8
- - Разбор домашнего задания
- - Классы работы с датами: Date, Calendar, TimeZone
- - Дата и время в Java 8+
- - File API
- - Освобождение ресурсов: try-with-resources
- - Домашнее задание
+### [Занятие 8](https://github.com/JavaWebinar/basejava/blob/lesson/lesson/lesson08.md)
+ - Работа с датами и временем
+ - Работа с файлами и ресурсами
 
-#### Занятие 9
- - Разбор домашнего задания
- - Обзор пакета java.io
- - Классы чтения/записи потоков: InputStream и OutputStream
- - Паттерн проектирования Decorator
- - Классы чтения/записи символов: Reader и Writer
- - Сериализация объектов
- - Обзор пакета java.nio
- - Введение в Java 8+ Stream API
- - Домашнее задание
+### [Занятие 9](https://github.com/JavaWebinar/basejava/blob/lesson/lesson/lesson09.md)
+ - Ввод/вывод
+ - Сериализация
+ - NIO
+ - Основы Java 8 Stream API
 
-#### Занятие 10
- - Разбор домашнего задания
- - Паттерн проектирования Strategy
- - Работа с XML (JAXB)
- - Работа с JSON (GSON)
- - Классы чтения/записи примитивных типов: DataInputStream и DataOutputStream
- - Домашнее задание
+### [Занятие 10](https://github.com/JavaWebinar/basejava/blob/lesson/lesson/lesson10.md)
+ - Формат XML. Работа с XML в Java
+ - JSON
+ - DataInputStream / DataOutputStream
 
-#### Занятие 11
- - Многопоточность
- - Закон Мура и Амдала
- - Потоки. Синхронизация доступа
- - Обзор методов класса Object
- - Ленивая инициализация
- - Java Memory Model
- - Deadlock
- - Домашнее задание
+### [Занятие 11](https://github.com/JavaWebinar/basejava/blob/lesson/lesson/lesson11.md)
+ - Многопоточность. Параллельное выполнение.
+ - Потоки. Синхронизация
+ - Ленивая инициализация, JMM
  
-#### Занятие 12
- - Разбор домашнего задания
- - Обзор классов java.util.concurrent
- - Синхронизаторы
- - ThreadLocal-переменные
- - Сравнение с обменом (Compare-and-swap)
- - Домашнее задание
+### [Занятие 12](https://github.com/JavaWebinar/basejava/blob/lesson/lesson/lesson12.md)
+ - java.util.concurrent
 
-#### Занятие 13
- - Разбор домашнего задания
- - Введение в реляционные базы данных
- - Язык SQL
- - Обзор NoSQL баз данных
- - Установка и настройка СУБД PostgreSQL
- - Работа с базами данных из IDEA
- - Конфигурирование базы данных и каталога хранения
- - Подключение базы данных к проекту
- - Обзор JDBC-архитектуры
- - Домашнее задание
+### [Занятие 13](https://github.com/JavaWebinar/basejava/blob/lesson/lesson/lesson13.md)
+ - Базы данных. Реляционные СУБД. PostgreSQL
+ - Конфигурирование данных в Java проекте
+ - Подключение DB в проект
 
-#### Занятие 14
- - Разбор домашнего задания
- - Операции соединения таблиц. JOIN
+### [Занятие 14](https://github.com/JavaWebinar/basejava/blob/lesson/lesson/lesson14.md)
+ - JOIN
  - Транзакции
- - Требования к транзакциям. ACID
- - Уровни изоляции транзакций в SQL
- - Установка и настройка контейнера сервлетов Tomcat
- - Домашнее задание
+ - Установка/запуск Tomcat
 
-#### Занятие 15
- - Разбор домашнего задания
- - Введение в HTML
- - Основы протокола HTTP
- - Настройка web.xml
- - Деплой web-приложения в Tomcat
+### [Занятие 15](https://github.com/JavaWebinar/basejava/blob/lesson/lesson/lesson15.md)
+ - HTML, Tomcat
  - Сервлеты
- - Домашнее задание
  
-#### Занятие 16
- - Разбор домашнего задания
- - Жизненный цикл сервлета
- - Создание динамических страниц. JSP
- - Расширенные возможности JSP. JSTL
- - Redirect и Forward
- - CRUD-операции
- - Домашнее задание
+### [Занятие 16](https://github.com/JavaWebinar/basejava/blob/lesson/lesson/lesson16.md)
+ - JSP
+ - JSTL
  
-#### Занятие 17
- - Разбор домашнего задания
- - Деплой приложения в облачный сервис Heroku
- - Загрузка классов в Java. Classloader
- - Домашнее задание
+### [Занятие 17](https://github.com/JavaWebinar/basejava/blob/lesson/lesson/lesson17.md)
+ - Деплой в Heroku
+ - Classloader
+ - Обзор Java Enterprise
 
 ## Рекомендуемые книги
-- [Яков Файн, "Программирование на Java для начинающих"](http://myflex.org/books/java4kids/java4kids.htm)
-- [Книги по Java: от новичка до профессионала](https://proglib.io/p/java-books-2019/)
-- [Джошуа Блох, "Java. Эффективное программирование, 3-е издание"](https://www.ozon.ru/context/detail/id/148627191/)
-- [Роберт Мартин, "Чистый код"](https://www.ozon.ru/context/detail/id/142429922/)
-- [Серия Head First, "Паттерны проектирования"](https://www.ozon.ru/context/detail/id/144233005/)
-- [Вайсфельд Мэтт, "Объектно-ориентированный подход"](https://www.ozon.ru/context/detail/id/166375103/?stat=YW5fMQ%3D%3D)
+- <a href="http://myflex.org/books/java4kids/java4kids.htm">YAKOV FAIN: Программирование на Java для начинающих</a>
+- <a href="https://habrahabr.ru/post/153373/">Книги по Java: от новичка до профессионала</a>
+- <a href="http://scanlibs.com/java-effektivnoe-programmirovanie-2-e-izdanie">Джошуа Блох: Java. Эффективное программирование, 2-е издание</a>
+- <a href="http://www.labirint.ru/books/87603/">Гамма, Хелм, Джонсон: Приемы объектно-ориентированного проектирования. Паттерны проектирования</a>
+- <a href="http://www.bookvoed.ru/book?id=639284">Редмонд Э.: Семь баз данных за семь недель. Введение в современные базы данных и идеологию NoSQL.</a>
 
-##  Ресурсы в сети
-- [EduTools плагин от JetBrains для изучения Kotlin, Java, Python, Scala и других языков](http://javaops.ru/view/story/story21#edutools)
-- [JetBrains Academy — интерактивный учебный курс по Java](https://www.jetbrains.com/ru-ru/academy/)
+##  Ресуры в сети
+- Руководство по Java Core
+- Java. Базовый курс
+- <a href="http://www.intuit.ru/studies/courses/16/16/info">intuit: Программирование на Java</a>
+- <a href="http://sernam.ru/book_java.php">Основы программирования на Java: учебное пособие</a>
