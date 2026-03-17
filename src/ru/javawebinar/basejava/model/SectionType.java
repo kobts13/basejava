@@ -17,5 +17,9 @@ public enum SectionType {
     public String getTitle() {
         return title;
     }
+
+    public String toHtml(Section section) {
+        return title + "<br />" + section.toString();
+    }
 }
 
